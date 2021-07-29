@@ -1,0 +1,63 @@
+version: '3.5'
+
+services:
+  db:
+    image: mysql:5.7.23
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: on-failure
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: dbp-c
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    networks:
+      - wordoc
+
+  adminer:
+    depends_on:
+      - db
+    image: adminer
+    ports:
+      - '8080:8080'
+    networks:
+      - wordoc
+
+  wordpress:
+    image: wordoc/wordoc-cms:latest
+    build:
+      target: wp
+      context: .
+    env_file:
+      - docker/wordpress.env
+    environment:
+      - "APACHE_DOCUMENT_ROOT=/var/www/html/public"
+    depends_on:
+      - db
+    restart: on-failure
+    ports:
+      - '8090:80'
+    networks:
+      - wordoc
+    volumes:
+			- ./config/php.conf.ini:/usr/local/etc/php/conf.d/conf.ini
+      - ./docker/wordpress.env:/usr/src/wordpress/.env
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: mailhog
+    ports:
+      - '1025:1025'
+      - '8025:8025'
+    networks:
+      - wordoc
+
+volumes:
+  db_data:
+
+networks:
+  wordoc:
+    external: true
