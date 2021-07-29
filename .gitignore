@@ -1,0 +1,43 @@
+### OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.log
+.cache
+.env
+
+### Vagrant
+acceptance_config.yml
+boxes/*
+.vagrant
+
+### Composer
+/html
+/vendor
+/public/wp
+
+### Wordpress
+/public/wp-content/blogs.dir/
+/public/wp-content/cache/
+/public/wp-content/upgrade/
+/public/wp-content/uploads/
+
+### Wordpress Plugins
+/public/wp-content/plugins/*
+!/public/wp-content/plugins/owc-gutenberg
+/public/wp-content/plugins/owc-gutenberg/assets/dist
+
+### Npm
+node_modules
+
+
+# Emacs
+*~
+\#*\#
+\.#*
+.#*.*
+*_flymake*

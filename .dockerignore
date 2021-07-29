@@ -1,0 +1,14 @@
+.git
+.gitignore
+.editorconfig
+Dockerfile
+docker-compose.yml
+Vagrantfile
+README.md
+.prettierrc
+node_modules
+.dockerignore
+.env.example
+Makefile
+provision/
+Vagrantfile
